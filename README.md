@@ -1,3 +1,9 @@
+# Useful Links
+
+# https://openweathermap.org/api/one-call-3
+# https://www.tutorialrepublic.com/html-tutorial/html5-geolocation.php
+# https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
