@@ -64,17 +64,18 @@
   background-color: #fff;
   border-radius: 6px;
   margin-right: 8px;
+  margin-bottom: 12px;
 }
 
 .search button {
   font-weight: 700;
-    font-size: 18;
-    border-radius: 6px;
-    padding: 12px 30px;
-    color: #fff;
-    background: #204667;
-    border: 0;
-    cursor: pointer;
+  font-size: 18;
+  border-radius: 6px;
+  padding: 12px 30px;
+  color: #fff;
+  background: #204667;
+  border: 0;
+  cursor: pointer;
 }
 
 .title {
@@ -217,6 +218,10 @@
 
   .search {
     flex-direction: row;
+  }
+
+  .search input {
+    margin-bottom: 0;
   }
 
   .title h2 {
