@@ -5,19 +5,23 @@ import CurrentWidget from "../widgets/CurrentWidget";
 import AirPollutionWidget from "../widgets/AirPollutionWidget";
 import AdditionalWidget from "../widgets/AdditionalWidget";
 import DailyWidget from "../widgets/DailyWidget";
+import Joyride from 'react-joyride';
 
 const Dashboard = () => {
-  const { searchByCity, setCity, city, weatherData } = useWeather();
+  const { searchByCity, setCity, city, steps } = useWeather();
 
   return (
     <div className="main-container">
       <div className="main-wrapper">
+        <Joyride
+          steps={steps}
+        />
 
         <div className="main-content">
           <div className="main-title">
             <div className="search">
               <input type='text' placeholder="Search by city..." value={city} onChange={(e) => setCity(e.target.value)}></input>
-              <button onClick={searchByCity}>Search</button>
+              <button onClick={searchByCity} className="my-first-step">Search</button>
             </div>
             <div className="title">
               <h1>WeatherApp</h1>
@@ -26,12 +30,7 @@ const Dashboard = () => {
           <DailyWidget />
           <div className="flex-wrapper">
             <div className="flex-item widget">
-              <div className="widget">
-                <h4>Rain</h4>
-              </div>
-              <div className="widget">
-                <h4>Visibility</h4>
-              </div>
+              <AdditionalWidget />
             </div>
             <div className="flex-item widget">
               <AirPollutionWidget />
@@ -42,7 +41,6 @@ const Dashboard = () => {
         {/* Day detail current weather */}
         <div className="detail-content">
           <CurrentWidget />
-          <AdditionalWidget />
         </div>
 
       </div>

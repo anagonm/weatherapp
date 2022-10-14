@@ -1,6 +1,6 @@
 export const getDay = date => new Date(date * 1000).getDate();
 
-export const getHour = date => new Date(date * 1000).toLocaleTimeString("en-US");
+export const getHour = date => (new Date(date * 1000).toLocaleTimeString("en-US"));
 
 export const getMonth = date => {
   return new Date(date  * 1000).toLocaleString('default', { month: 'short' });
