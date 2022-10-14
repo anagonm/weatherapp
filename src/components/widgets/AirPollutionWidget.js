@@ -28,7 +28,7 @@ const AirPollutionWidget = () => {
     <>
       <div className="air-title">
         <h4>Your Current Air Pollution</h4>
-        <p>{airPollutionQuality[quality]}</p>
+        <h3>{airPollutionQuality[quality]}</h3>
       </div>
       <div className="flex-wrap">
           <div className="air-data">

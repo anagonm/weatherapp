@@ -1,5 +1,5 @@
 import React from "react";
-import { getDay, getHour, getMonth, getWeatherIcon } from "../../utils";
+import { convertKelvinToFahrenheit, getDay, getHour, getMonth, getWeatherIcon } from "../../utils";
 
 
 
@@ -18,7 +18,7 @@ const DailyDetail = ({ data }) => {
       <p>{getMonth(dt)} {getDay(dt)}</p>
       <p>{getHour(dt)}</p>
       <img className="icon" src={getWeatherIcon(weather[0].icon)} alt=""/>
-      <h3>{main.temp}</h3>
+      <h3>{convertKelvinToFahrenheit(main.temp)}º</h3>
       <p>Clouds | {clouds.all}%</p>
       <p>{weather[0].description}</p>
     </div>

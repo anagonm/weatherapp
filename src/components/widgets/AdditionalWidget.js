@@ -16,13 +16,13 @@ const AdditionalWidget = () => {
 
   return (
     <div className="weather-extra-wrapper my-other-step">
-      <div className="widget weather-extra bg-extra3">
+      <div className="widget weather-extra bg-extra1">
           <img src={Sunrise} alt="sunrise" />
-          <h3>{getHour(sunrise)}</h3>
+          <h4>{getHour(sunrise)}</h4>
       </div>
       <div className="widget weather-extra bg-extra4 mb-0">
           <img src={Sunset} alt="sunset" />
-          <h3>{getHour(sunset)}</h3>
+          <h4>{getHour(sunset)}</h4>
       </div>
     </div>
   )

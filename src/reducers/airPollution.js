@@ -1,14 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import * as AirPollutionAPI from '../api/airPollution';
-
-export const getAirPollutionByLatLon = createAsyncThunk('airPollution/getAirPollution', async ({lat, lon}) => {
-  const response = await AirPollutionAPI.getAirPollutionByLatLon(lat, lon);
-  return response;
-});
+import { createSlice } from '@reduxjs/toolkit'
+import { getAirPollutionByLatLon } from '../thunks/airPollution'
 
 const initialState = {
   loading: false,
-  error: false,
+  error: undefined,
   success: false,
   data: {}
 }
@@ -25,7 +20,9 @@ export const airPollutionSlice = createSlice({
       state.loading = false
       state.data = payload
     },
-    [getAirPollutionByLatLon.rejected]: (state) => {
+    [getAirPollutionByLatLon.rejected]: (state, { payload }) => {
+      const { message } = payload;
+      state.error = message;
       state.loading = false
     },
   }
