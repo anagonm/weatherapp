@@ -20,6 +20,17 @@ export const WeatherProvider = ({ children }) => {
   const [lat, setLat]     = useState(undefined);
   const [lon, setLon]     = useState(undefined);
 
+  const [steps, setSteps] = useState([
+    {
+      target: '.my-first-step',
+      content: 'This is my awesome feature!',
+    },
+    {
+      target: '.my-other-step',
+      content: 'This another awesome feature!',
+    },
+  ])
+
   const getURLParam = (param) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -103,7 +114,8 @@ export const WeatherProvider = ({ children }) => {
     airPollutionData,
     forecast,
     generateLink,
-    resetApp
+    resetApp,
+    steps
   };
 
   return (

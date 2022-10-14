@@ -18,8 +18,9 @@ const DailyDetail = ({ data }) => {
       <p>{getMonth(dt)} {getDay(dt)}</p>
       <p>{getHour(dt)}</p>
       <img className="icon" src={getWeatherIcon(weather[0].icon)} alt=""/>
-      <p>Clouds ({clouds.all}%)</p>
-      <p>Weather ({weather[0].main})</p>
+      <h3>{main.temp}</h3>
+      <p>Clouds | {clouds.all}%</p>
+      <p>{weather[0].description}</p>
     </div>
   );
 }
