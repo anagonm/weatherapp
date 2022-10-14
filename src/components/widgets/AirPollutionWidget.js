@@ -12,7 +12,7 @@ const airPollutionQuality = {
 };
 
 const AirPollutionWidget = () => {
-  const { airPollutionData, weatherData } = useWeather();
+  const { airPollutionData } = useWeather();
 
   if (airPollutionData.loading || Object.keys(airPollutionData.data).length === 0) {
     return <Loader />
@@ -20,28 +20,57 @@ const AirPollutionWidget = () => {
 
   // It comes in an array with only one object from the OpenWeather API
   const pollutionInfo = airPollutionData.data.list[0];
-  const { name: location } = weatherData.data;
   const { main, components } = pollutionInfo;
   const { aqi } = main;
   const quality = Math.trunc(Math.floor(aqi));
 
   return (
     <>
-      <h4>{location} Air Pollution</h4>
-      <p>{airPollutionQuality[quality]}</p>
-      <div className="flex-wrapper">
-        <div className="flex-item">
-          <p><span>CO</span> | <span>{components.co}</span></p>
-          <p><span>Nh3</span> | <span>{components.nh3}</span></p>
-          <p><span>NO</span> | <span>{components.no}</span></p>
-          <p><span>No2</span> | <span>{components.no2}</span></p>
-        </div>
-        <div className="flex-item">
-          <p><span>O3</span> | <span>{components.o3}</span></p>
-          <p><span>Pm2 5</span> | <span>{components.pm2_5}</span></p>
-          <p><span>Pm 10</span> | <span>{components.pm10}</span></p>
-          <p><span>So2</span> | <span>{components.so2}</span></p>
-        </div>
+      <div className="air-title">
+        <h4>Your Current Air Pollution</h4>
+        <p>{airPollutionQuality[quality]}</p>
+      </div>
+      <div className="flex-wrap">
+          <div className="air-data">
+            <span>1</span>
+            <h4>CO</h4>
+            <p>{components.co}</p>
+          </div>
+          <div className="air-data">
+            <span>2</span>
+            <h4>Nh3</h4>
+            <p>{components.nh3}</p>
+          </div>
+          <div className="air-data">
+            <span>3</span>
+            <h4>NO</h4>
+            <p>{components.no}</p>
+          </div>
+          <div className="air-data">
+            <span>3</span>
+            <h4>No2</h4>
+            <p>{components.no2}</p>
+          </div>
+          <div className="air-data">
+            <span>3</span>
+            <h4>O3</h4>
+            <p>{components.o3}</p>
+          </div>
+          <div className="air-data">
+            <span>3</span>
+            <h4>Pm2 5</h4>
+            <p>{components.pm2_5}</p>
+          </div>
+          <div className="air-data">
+            <span>3</span>
+            <h4>Pm 10</h4>
+            <p>{components.pm10}</p>
+          </div>
+          <div className="air-data">
+            <span>3</span>
+            <h4>So2</h4>
+            <p>{components.so2}</p>
+          </div>
       </div>
     </>
   );
