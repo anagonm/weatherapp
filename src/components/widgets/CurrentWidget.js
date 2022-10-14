@@ -1,10 +1,10 @@
 import React from "react";
 import { useWeather } from "../../providers/weatherContext";
-import { convertKelvinToFahrenheit, getDay, getMonth, getWeatherIcon } from "../../utils";
+import { convertKelvinToFahrenheit, getWeatherIcon } from "../../utils";
 import Loader from "../Loader";
 
 const CurrentWidget = () => {
-  const { weatherData } = useWeather();
+  const { weatherData, generateLink, resetApp } = useWeather();
 
   if (weatherData.loading || Object.keys(weatherData.data).length === 0) {
     return <Loader />
@@ -17,7 +17,7 @@ const CurrentWidget = () => {
 
   return (
     <div className="widget weather-detail">
-      <h2>{location}</h2>
+      <h2>{location} <p onClick={generateLink}>Share</p> | <p onClick={resetApp}>Reset</p></h2>
       <img className="icon" src={getWeatherIcon(icon)} alt={icon} />
       <p>{description}</p>
       <h3>{Math.trunc(convertKelvinToFahrenheit(temp))}º</h3>

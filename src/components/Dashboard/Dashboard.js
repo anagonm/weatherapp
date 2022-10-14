@@ -20,7 +20,7 @@ const Dashboard = () => {
               <button onClick={searchByCity}>Search</button>
             </div>
             <div className="title">
-              <h2>Tuesday, October 14 | 07:46PM</h2>
+              <h1>WeatherApp</h1>
             </div>
           </div>
           <DailyWidget />

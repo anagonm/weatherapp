@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as WeatherThunkActions from "../reducers/weather";
 import * as AirPollutionThunkActions from "../reducers/airPollution";
 import * as ForecastThunkActions from "../reducers/forecast";
-import { getPositionFromLocalStorage, savePosition } from '../utils';
+import { getPositionFromLocalStorage, savePosition, setObjectInLocalStorage } from '../utils';
 
 export const WeatherProvider = ({ children }) => {
   // Redux state management
@@ -20,7 +20,24 @@ export const WeatherProvider = ({ children }) => {
   const [lat, setLat]     = useState(undefined);
   const [lon, setLon]     = useState(undefined);
 
+  const getURLParam = (param) => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(param);
+  }
+
+  const resetApp = () => {
+    window.location.href = window.location.href.split("?")[0];
+    setObjectInLocalStorage(null);
+  }
+
   const getGeoPositon = () => {
+    // A friend is sharing the link
+    if (getURLParam('lat') && getURLParam('lon')) {
+      setLat(getURLParam('lat'));
+      setLon(getURLParam('lon'));
+      return;
+    }
 
     const positionLocalStorage = getPositionFromLocalStorage();
     if (positionLocalStorage !== null) {
@@ -61,6 +78,16 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
+  const generateLink = () => {
+    const location = getPositionFromLocalStorage();
+    const { lat, lon } = location;
+    const text = `${window.location.href}?lat=${lat}&lon=${lon}`;
+    navigator.clipboard.writeText(text).then(
+      () => { alert("success"); },
+      () => { }
+    );
+  }
+
   const contextValue = {
     error,
     setError,
@@ -74,7 +101,9 @@ export const WeatherProvider = ({ children }) => {
     dispatch,
     searchByCity,
     airPollutionData,
-    forecast
+    forecast,
+    generateLink,
+    resetApp
   };
 
   return (
