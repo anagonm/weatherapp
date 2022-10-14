@@ -27,11 +27,13 @@
 
 .main-container {
   color: var(--bg-primary);
+  position: relative;
 }
 
 .search {
   display: flex;
   flex-direction: column;
+  padding: 0 16px;
 }
 
 .search input {
@@ -49,18 +51,19 @@
 
 .search button {
   font-weight: 700;
-    font-size: 18;
-    border-radius: 6px;
-    padding: 12px 30px;
-    color: #fff;
-    background: #204667;
-    border: 0;
-    cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 12px 30px;
+  color: #fff;
+  background: #204667;
+  border: 0;
+  cursor: pointer;
 }
 
 .title {
   padding-bottom: 12px;
   color: #292a35;
+  padding-left: 16px;
 }
 
 .title h2 {
@@ -108,6 +111,7 @@
 
 .widget-title {
   margin-bottom: 12px;
+  margin-left: 16px;
 }
 
 .weather-extra {
@@ -237,7 +241,7 @@
   text-align: center;
 }
 
-.air-title p {
+.air-title h3 {
   font-size: 32px;
   font-weight: 800;
   margin: 12px 0;
@@ -288,6 +292,152 @@
   margin-bottom: 0;
 }
 
+.notification {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 7px 7px 15px -10px rgb(37 38 49 / 31%);
+  text-transform: capitalize;
+}
+
+.notification.info {
+  background-color: rgb(32, 162, 255);
+}
+
+.notification.error {
+  background-color: rgb(255, 58, 32);
+}
+
+.notification-message {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.notification-message img {
+  width: 16px;
+  margin-right: 12px;
+}
+
+.notification img {
+  width: 12px;
+  cursor: pointer;
+}
+
+.modal-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgb(12 28 41 / 86%);
+  padding: 24px;
+}
+
+.modal-wrapper {
+  width: 100%;
+  max-width: 330px;
+  background-color: #ffffff;
+  box-shadow: 7px 7px 15px -10px rgb(37 38 49 / 31%);
+  border-radius: 8px;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%,-50%);
+}
+
+.modal-header {
+  background-color: #204667;
+  padding: 24px;
+  color: #ffffff;
+  border-radius: 8px 8px 0 0;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 24px 36px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.modal-body {
+  color: black;
+  padding-right: 40px;
+}
+
+.modal-body h3 {
+  margin-bottom: 12px;
+  color: #204667;
+}
+
+.modal-body list {
+  list-style: none;
+}
+
+.modal-body list li:last-child {
+  margin-bottom: 24px;
+}
+
+.modal-content img {
+  width: 300px;
+  box-shadow: 0px 2px 7px -2px rgb(37 38 49 / 31%);
+  border-radius: 8px;
+}
+
+.modal-enphasis {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 24px 24px;
+  max-width: 680px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background-color: #d5ebf4;
+}
+
+.modal-enphasis img {
+  margin-right: 12px;
+  width: 16px;
+}
+
+.modal-button {
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  max-width: 680px;
+  padding: 24px 0;
+}
+
+.modal-button button {
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 12px 30px;
+  color: #fff;
+  background: #ff9800;
+  border: 0;
+  cursor: pointer;
+  width: 200px;
+}
+
+
+
 /* TABLET */
 @media (min-width: 768px) {
   .main-title {
@@ -332,6 +482,25 @@
     align-items: flex-start;
   }
 
+  .weather-detail {
+    position: relative;
+  }
+
+  .widget-actions {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .widget-actions img {
+    cursor: pointer;
+    margin-right: 12px;
+    width: 18px;
+  }
+
   .weather-detail, .weather-extra-wrapper, .flex-item {
     flex: 1 1 0px;
     align-self: stretch;
@@ -357,6 +526,15 @@
     margin-right: 16px;
     margin-bottom: 16px;
   }
+
+  .modal-wrapper {
+    top: 30%;
+    max-width: 720px;
+  }
+
+  .modal-content {
+    flex-direction: row;
+  }
 }
 
 /* DESKTOP */
@@ -365,7 +543,7 @@
     margin-bottom: 12px;
   }
 
-  .search input, button {
+  .search input,  .search button {
     flex: 1 1 0px;
   }
 
@@ -403,5 +581,9 @@
 
   .daily-item .icon {
     width: 140px;
+  }
+
+  .modal-wrapper {
+    top: 50%;
   }
 }

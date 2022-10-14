@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { WeatherContext } from './weatherContext';
 import { useDispatch, useSelector } from 'react-redux';
-import * as WeatherThunkActions from "../reducers/weather";
-import * as AirPollutionThunkActions from "../reducers/airPollution";
-import * as ForecastThunkActions from "../reducers/forecast";
-import { getPositionFromLocalStorage, savePosition, setObjectInLocalStorage } from '../utils';
+import * as WeatherThunkActions from "../thunks/weather";
+import * as AirPollutionThunkActions from "../thunks/airPollution";
+import * as ForecastThunkActions from "../thunks/forecast";
+import { getLocalStorageItem, savePosition, setLocalStorageItem } from '../utils';
+import * as WeatherActions from '../reducers/weather';
 
 export const WeatherProvider = ({ children }) => {
   // Redux state management
@@ -15,7 +16,9 @@ export const WeatherProvider = ({ children }) => {
   const forecast          = useSelector(state => state.forecast)
 
   // Component states
-  const [error, setError] = useState(undefined)
+  const [error, setError] = useState(undefined);
+  const [info, setInfo] = useState(undefined);
+  const [modal, setModal] = useState(true);
   const [city, setCity]   = useState('');
   const [lat, setLat]     = useState(undefined);
   const [lon, setLon]     = useState(undefined);
@@ -31,6 +34,15 @@ export const WeatherProvider = ({ children }) => {
     },
   ])
 
+  const hideModal = () => {
+    setModal(prevState => !prevState);
+    setLocalStorageItem("welcomeModal", true);
+  }
+
+  const hideError = () => {
+    dispatch(WeatherActions.setError(false));
+  }
+
   const getURLParam = (param) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -39,7 +51,7 @@ export const WeatherProvider = ({ children }) => {
 
   const resetApp = () => {
     window.location.href = window.location.href.split("?")[0];
-    setObjectInLocalStorage(null);
+    setLocalStorageItem("gps_position", null);
   }
 
   const getGeoPositon = () => {
@@ -50,7 +62,7 @@ export const WeatherProvider = ({ children }) => {
       return;
     }
 
-    const positionLocalStorage = getPositionFromLocalStorage();
+    const positionLocalStorage = getLocalStorageItem("gps_position");
     if (positionLocalStorage !== null) {
       setLat(positionLocalStorage.lat);
       setLon(positionLocalStorage.lon);
@@ -90,18 +102,24 @@ export const WeatherProvider = ({ children }) => {
   }
 
   const generateLink = () => {
-    const location = getPositionFromLocalStorage();
+    const location = getLocalStorageItem("gps_position");
     const { lat, lon } = location;
     const text = `${window.location.href}?lat=${lat}&lon=${lon}`;
     navigator.clipboard.writeText(text).then(
-      () => { alert("success"); },
-      () => { }
+      () => { 
+        console.log('@@@@ click to copy');
+        setInfo("Url copied to clipboard");
+      }
     );
+  }
+
+  const hideInfo = () => {
+    setInfo(undefined);
   }
 
   const contextValue = {
     error,
-    setError,
+    hideError,
     city,
     setCity,
     lat,
@@ -115,7 +133,11 @@ export const WeatherProvider = ({ children }) => {
     forecast,
     generateLink,
     resetApp,
-    steps
+    steps,
+    modal,
+    hideModal,
+    info,
+    hideInfo
   };
 
   return (

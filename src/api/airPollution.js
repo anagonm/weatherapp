@@ -1,6 +1,4 @@
-import { BASE_URL_WEATHER, fetchData } from "./common";
-
-export const ERROR_INVALID_LAT_LON = "Invalid latitude or longitude, make sure your browser support Javascript and HTML";
+import { BASE_URL_WEATHER, ERROR_INVALID_LAT_LON, fetchData } from "./common";
 
 export const getAirPollutionByLatLon = async (lat_, lon_) => {
   if (!lat_ || !lon_) {

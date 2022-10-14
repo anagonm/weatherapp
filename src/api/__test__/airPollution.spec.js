@@ -1,5 +1,6 @@
 import fetchMock from "jest-fetch-mock";
-import { ERROR_INVALID_LAT_LON, getAirPollutionByLatLon } from "../airPollution";
+import { getAirPollutionByLatLon } from "../airPollution";
+import { ERROR_INVALID_LAT_LON } from "../common";
 
 fetchMock.enableMocks();
 
@@ -44,8 +45,6 @@ describe("AirPolutionAPI", () => {
   })
 
   it("returns and error if invalid data", async () => {
-    fetch.mockResponseOnce(JSON.stringify(fetchAirPolutionMockedResponse));
-
     let result = null;
 
     try {

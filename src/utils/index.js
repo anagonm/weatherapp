@@ -7,7 +7,7 @@ export const getMonth = date => {
 }
 
 export const convertKelvinToFahrenheit = k => {
-  return ((k-273.15)*1.8)+32
+  return Math.trunc(((k-273.15)*1.8)+32)
 }
 
 export const getWeatherIcon = icon => {
@@ -15,26 +15,27 @@ export const getWeatherIcon = icon => {
 }
 
 export const savePosition = (lat, lon) => {
-  const position = getPositionFromLocalStorage();
+  const position = getLocalStorageItem("gps_position");
+  const gpsPosition = "gps_position";
   
   const coordinates = { lat, lon };
 
   if (position) {
     if (position.lat !== lat || position.lon !== lon) {
       const newPositionData = {...position, ...coordinates}
-      setObjectInLocalStorage(newPositionData);
+      setLocalStorageItem(gpsPosition, newPositionData);
     }
   } else {
-    setObjectInLocalStorage(coordinates)
+    setLocalStorageItem(gpsPosition, coordinates);
   }
 }
 
-export const setObjectInLocalStorage = (item) => {
-  localStorage.setItem("gps_position", JSON.stringify(item));
+export const setLocalStorageItem = (name, value) => {
+  localStorage.setItem(name, JSON.stringify(value));
 }
 
-export const getPositionFromLocalStorage = () => {
-  const data = localStorage.getItem("gps_position");
+export const getLocalStorageItem = name => {
+  const data = localStorage.getItem(name);
   if (data !== undefined) {
     return JSON.parse(data);
   }
