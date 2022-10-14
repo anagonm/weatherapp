@@ -9,7 +9,6 @@ export const getWeatherByLatLon = async (lat_, lon_) => {
 export const getWeatherByCity = async (city_) => {
   const baseUrl = BASE_URL_WEATHER + "/weather";;
   const params = `q=${city_}`;
-
   return await fetchData(baseUrl, params);
 };
 

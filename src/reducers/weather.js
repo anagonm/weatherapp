@@ -60,7 +60,7 @@ export const weatherSlice = createSlice({
     },
     [getWeatherByCity.rejected]: (state) => {
       state.loading = false
-    },
+    }
   }
 })
 

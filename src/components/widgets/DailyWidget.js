@@ -1,12 +1,26 @@
 import React from "react";
+import { useWeather } from "../../providers/weatherContext";
+import Loader from "../Loader";
+import DailyDetail from "./DailyDetail";
 
 const DailyWidget = () => {
+  const { forecast } = useWeather();
+
+  if (forecast.loading || Object.keys(forecast.data).length === 0) {
+    return <Loader />
+  }
+
+  const { list: forecastList } = forecast.data;
+
   return (
-    <div className="daily">
-      <img src="https://openweathermap.org/img/wn/10d@2x.png" alt=""/>
-      <p>Sun</p>
-      <p>28º</p>
-    </div>
+    <>
+      <h3 className="widget-title">Forecast next 5 days</h3>
+      <div className="daily-container">
+        <div className="daily-wrapper">
+          { forecastList && forecastList.map(item => <DailyDetail key={item.dt} data={item}/>) }
+        </div>
+      </div>
+    </>
   );
 }
 

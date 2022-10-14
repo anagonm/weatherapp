@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as AirPollutionAPI from '../api/airPollution';
 
-export const getAirPollution = createAsyncThunk('airPollution/getAirPollution', async ({lat, lon}) => {
+export const getAirPollutionByLatLon = createAsyncThunk('airPollution/getAirPollution', async ({lat, lon}) => {
   const response = await AirPollutionAPI.getAirPollutionByLatLon(lat, lon);
   return response;
 });
@@ -18,14 +18,14 @@ export const airPollutionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getAirPollution.pending]: (state) => {
+    [getAirPollutionByLatLon.pending]: (state) => {
       state.loading = true
     },
-    [getAirPollution.fulfilled]: (state, { payload }) => {
+    [getAirPollutionByLatLon.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.data = payload
     },
-    [getAirPollution.rejected]: (state) => {
+    [getAirPollutionByLatLon.rejected]: (state) => {
       state.loading = false
     },
   }
