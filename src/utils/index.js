@@ -15,15 +15,14 @@ export const getWeatherIcon = icon => {
 }
 
 export const savePosition = (lat, lon) => {
-  const position = getLocalStorageItem("gps_position");
   const gpsPosition = "gps_position";
+  const position = getLocalStorageItem(gpsPosition);
   
   const coordinates = { lat, lon };
 
   if (position) {
     if (position.lat !== lat || position.lon !== lon) {
-      const newPositionData = {...position, ...coordinates}
-      setLocalStorageItem(gpsPosition, newPositionData);
+      setLocalStorageItem(gpsPosition, coordinates);
     }
   } else {
     setLocalStorageItem(gpsPosition, coordinates);
@@ -36,8 +35,9 @@ export const setLocalStorageItem = (name, value) => {
 
 export const getLocalStorageItem = name => {
   const data = localStorage.getItem(name);
-  if (data !== undefined) {
+  if (data) {
     return JSON.parse(data);
   }
+
   return null;
 }

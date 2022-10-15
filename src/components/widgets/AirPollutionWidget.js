@@ -23,7 +23,7 @@ const AirPollutionWidget = () => {
   const { main, components } = pollutionInfo;
   const { aqi } = main;
   const quality = Math.trunc(Math.floor(aqi));
-
+  
   return (
     <>
       <div className="air-title">

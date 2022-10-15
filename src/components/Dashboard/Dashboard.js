@@ -11,7 +11,7 @@ import { getLocalStorageItem } from "../../utils";
 // import Joyride from 'react-joyride';
 
 const Dashboard = () => {
-  const { modal, hideModal, searchByCity, setCity, city, steps, weatherData, hideError, info, hideInfo } = useWeather();
+  const { modal, hideModal, searchByCity, setCity, city, weatherData, hideError, info, hideInfo } = useWeather();
 
   const renderError = (weatherData_) => {
     if (weatherData_ && weatherData_.error) {
@@ -26,16 +26,9 @@ const Dashboard = () => {
     }
   };
 
-
-  // const renderInfoClipboard = () => <Notification message={info} hideNotification={hideInfo} type="info" />
-
-
   return (
-    <div className="main-container">
+    <div className="main-container" data-testid="main-container">
       <div className="main-wrapper">
-        {/* <Joyride
-          steps={steps}
-        /> */}
         <div className="main-content">
           <div className="main-title">
             <div className="search">
@@ -65,9 +58,9 @@ const Dashboard = () => {
 
       </div>
 
-      {renderError(weatherData)}
-      {modal && renderModal()}
-      {info && <Notification message={info} hideNotification={hideInfo} type="info" />}
+      { renderError(weatherData) }
+      { modal && renderModal() }
+      { info && <Notification message={info} hideNotification={hideInfo} type="info" /> }
 
     </div>
   )
