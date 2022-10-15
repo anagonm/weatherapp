@@ -6,6 +6,12 @@ import DailyDetail from "./DailyDetail";
 const DailyWidget = () => {
   const { forecast } = useWeather();
 
+  console.log('forecast', forecast)
+
+  if (!forecast || !forecast.data) {
+    return <Loader />;
+  }
+
   if (forecast.loading || Object.keys(forecast.data).length === 0) {
     return <Loader />
   }

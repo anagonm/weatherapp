@@ -50,6 +50,10 @@
   background: var(--medium-blue);
 }
 
+.search button:hover {
+  background: #17324b;
+}
+
 .title {
   padding-bottom: 12px;
   padding-left: 16px;
@@ -375,11 +379,12 @@
   color: var(--medium-blue);
 }
 
-.modal-body list {
+.modal-body ul {
   list-style: none;
+  padding: 0;
 }
 
-.modal-body list li:last-child {
+.modal-body ul li:last-child {
   margin-bottom: 24px;
 }
 
@@ -424,6 +429,11 @@
   border: 0;
   cursor: pointer;
   width: 200px;
+  transition: 0.5s;
+}
+
+.modal-button button:hover {
+  background: #eb8d00;
 }
 
 .weather-detail {
@@ -447,9 +457,14 @@
   padding: 5px 8px;
   border: 0;
   cursor: pointer;
-  background: #ffffff;
+  background: var(--white);
   margin-right: 6px;
-  border: 1px solid #204667;
+  border: 1px solid var(--dark-blue);
+  transition: 0.5s;
+}
+
+.widget-actions button:hover {
+  background: var(--gray);
 }
 
 
