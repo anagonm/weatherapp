@@ -4,55 +4,56 @@ import { ERROR_INVALID_CITY, ERROR_INVALID_LAT_LON } from "../common";
 
 fetchMock.enableMocks();
 
+export const weatherApiMockedResponse = {
+  "coord": {
+     "lon": -80.1747,
+     "lat": 25.9445
+  },
+  "weather": [
+     {
+        "id": 802,
+        "main": "Clouds",
+        "description": "scattered clouds",
+        "icon": "03d"
+     }
+  ],
+  "base": "stations",
+  "main": {
+     "temp": 301.23,
+     "feels_like": 305.29,
+     "temp_min": 299.82,
+     "temp_max": 302.16,
+     "pressure": 1013,
+     "humidity": 79
+  },
+  "visibility": 10000,
+  "wind": {
+     "speed": 3.09,
+     "deg": 330
+  },
+  "clouds": {
+     "all": 40
+  },
+  "dt": 1665761018,
+  "sys": {
+     "type": 2,
+     "id": 2037247,
+     "country": "US",
+     "sunrise": 1665746332,
+     "sunset": 1665788050
+  },
+  "timezone": -14400,
+  "id": 4166233,
+  "name": "North Miami Beach",
+  "cod": 200
+};
+
+
 describe("weatherApi", () => {
   const latitude = 25.9445;
   const longitude = -80.1747;
   const city = "North Miami Beach";
   const invaliCity = "North Miami Beac"
-
-  const weatherApiMockedResponse = {
-    "coord": {
-       "lon": -80.1747,
-       "lat": 25.9445
-    },
-    "weather": [
-       {
-          "id": 802,
-          "main": "Clouds",
-          "description": "scattered clouds",
-          "icon": "03d"
-       }
-    ],
-    "base": "stations",
-    "main": {
-       "temp": 301.23,
-       "feels_like": 305.29,
-       "temp_min": 299.82,
-       "temp_max": 302.16,
-       "pressure": 1013,
-       "humidity": 79
-    },
-    "visibility": 10000,
-    "wind": {
-       "speed": 3.09,
-       "deg": 330
-    },
-    "clouds": {
-       "all": 40
-    },
-    "dt": 1665761018,
-    "sys": {
-       "type": 2,
-       "id": 2037247,
-       "country": "US",
-       "sunrise": 1665746332,
-       "sunset": 1665788050
-    },
-    "timezone": -14400,
-    "id": 4166233,
-    "name": "North Miami Beach",
-    "cod": 200
- };
 
   const weatherApiCityInvalidMockedResponse = {
     "cod": "404",

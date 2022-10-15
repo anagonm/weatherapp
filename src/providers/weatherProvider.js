@@ -118,26 +118,20 @@ export const WeatherProvider = ({ children }) => {
   }
 
   const contextValue = {
-    error,
-    hideError,
-    city,
-    setCity,
-    lat,
-    setLat,
-    lon,
-    setLon,
-    weatherData,
     dispatch,
-    searchByCity,
+    error, hideError,
+    city, setCity,
+    lat, setLat,
+    lon, setLon,
+    modal, hideModal,
+    info, hideInfo,
+    weatherData,
     airPollutionData,
     forecast,
+    searchByCity,
     generateLink,
     resetApp,
     steps,
-    modal,
-    hideModal,
-    info,
-    hideInfo
   };
 
   return (

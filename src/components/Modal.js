@@ -4,7 +4,7 @@ import MapImg from "../assets/map.jpeg"
 
 const Modal = ({ hideModal }) => {
   return (
-    <div className="modal-container">
+    <div className="modal-container" data-testid="modal-container">
       <div className="modal-wrapper">
         <div className="modal-header">
           <h2>WeatherApp</h2>
@@ -14,13 +14,13 @@ const Modal = ({ hideModal }) => {
         <div className="modal-content">
           <div className="modal-body">
             <h3>App Features</h3>
-            <list>
+            <ul>
               <li>- Get real time weather with Geolocation</li>
               <li>- Search weather by city</li>
               <li>- Forecast 5 days / 3 hours</li>
               <li>- Air Pollution from Geolocation</li>
               <li>- Share current location weather with friends</li>
-            </list>
+            </ul>
           </div>
           <img src={MapImg} alt="map"/>
         </div>
@@ -31,7 +31,7 @@ const Modal = ({ hideModal }) => {
         </div>
 
         <div className="modal-button">
-          <button onClick={hideModal}>Continue</button>
+          <button onClick={hideModal} data-testid="hide-modal-btn">Continue</button>
         </div>
       </div>
     </div>
