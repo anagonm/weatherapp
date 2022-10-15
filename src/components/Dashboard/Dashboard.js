@@ -9,7 +9,6 @@ import Modal from "../Modal";
 import Notification from "../Notification";
 import { getLocalStorageItem } from "../../utils";
 import Search from "../Search";
-// import Joyride from 'react-joyride';
 
 const Dashboard = () => {
   const { modal, hideModal, weatherData, hideError, info, hideInfo } = useWeather();

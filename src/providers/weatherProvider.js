@@ -7,9 +7,7 @@ import * as AirPollutionThunkActions from "../thunks/airPollution";
 import * as ForecastThunkActions from "../thunks/forecast";
 import { getBrowserGeoPosition, getLocalStorageItem, getURLParam, placeLinkIntoClipBoard, savePosition, setLocalStorageItem } from '../utils';
 import * as WeatherActions from '../reducers/weather';
-
-const MESSAGE_URL_COPIED = "URL was copied to clipboard";
-
+import * as Constants from '../utils/constants';
 
 export const WeatherProvider = ({ children }) => {
   // Redux state management
@@ -28,7 +26,7 @@ export const WeatherProvider = ({ children }) => {
 
   const hideModal = () => {
     setModal(prevState => !prevState);
-    setLocalStorageItem("welcomeModal", true);
+    setLocalStorageItem(Constants.LOCAL_STORAGE_KEY_WELCOME_MODAL, true);
   }
 
   const hideError = () => {
@@ -37,13 +35,13 @@ export const WeatherProvider = ({ children }) => {
 
   const getGeoPositon = async () => {
     // A friend is sharing the link
-    if (getURLParam('lat') && getURLParam('lon')) {
-      setLat(getURLParam('lat'));
-      setLon(getURLParam('lon'));
+    if (getURLParam(Constants.URL_PARAM_LAT) && getURLParam(Constants.URL_PARAM_LON)) {
+      setLat(getURLParam(Constants.URL_PARAM_LAT));
+      setLon(getURLParam(Constants.URL_PARAM_LON));
       return;
     }
 
-    const positionLocalStorage = getLocalStorageItem("gps_position");
+    const positionLocalStorage = getLocalStorageItem(Constants.LOCAL_STORAGE_KEY_GPS_POSITION);
     if (positionLocalStorage !== null) {
       setLat(positionLocalStorage.lat);
       setLon(positionLocalStorage.lon);
@@ -82,7 +80,7 @@ export const WeatherProvider = ({ children }) => {
 
   const copyShareUrl = () => {
     placeLinkIntoClipBoard().then(() => { 
-      setInfo(MESSAGE_URL_COPIED);
+      setInfo(Constants.MESSAGE_URL_COPIED);
     });
   }
 

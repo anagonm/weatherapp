@@ -1,4 +1,5 @@
-import { BASE_URL_WEATHER, ERROR_INVALID_LAT_LON, fetchData } from "./common";
+import { ERROR_INVALID_LAT_LON, BASE_URL_WEATHER } from "../utils/constants";
+import { fetchData } from "./common";
 
 export const getAirPollutionByLatLon = async (lat_, lon_) => {
   if (!lat_ || !lon_) {

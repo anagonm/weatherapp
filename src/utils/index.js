@@ -1,4 +1,4 @@
-const ERROR_BROWSER_GEOLOCATION_OFF = "It seems like your browser does not support HTML5 geolocation. Please install a different browser and enable javascript";
+import { ERROR_BROWSER_GEOLOCATION_OFF, LOCAL_STORAGE_KEY_GPS_POSITION, URL_PARAM_LAT, URL_PARAM_LON } from "./constants";
 
 export const getDay = date => new Date(date * 1000).getDate();
 
@@ -17,17 +17,16 @@ export const getWeatherIcon = icon => {
 }
 
 export const savePosition = (lat, lon) => {
-  const gpsPosition = "gps_position";
-  const position = getLocalStorageItem(gpsPosition);
+  const position = getLocalStorageItem(LOCAL_STORAGE_KEY_GPS_POSITION);
   
   const coordinates = { lat, lon };
 
   if (position) {
     if (position.lat !== lat || position.lon !== lon) {
-      setLocalStorageItem(gpsPosition, coordinates);
+      setLocalStorageItem(LOCAL_STORAGE_KEY_GPS_POSITION, coordinates);
     }
   } else {
-    setLocalStorageItem(gpsPosition, coordinates);
+    setLocalStorageItem(LOCAL_STORAGE_KEY_GPS_POSITION, coordinates);
   }
 }
 
@@ -46,13 +45,13 @@ export const getLocalStorageItem = name => {
 
 export const resetApp = () => {
   window.location.href = window.location.href.split("?")[0]; // remove params from URL if any
-  setLocalStorageItem("gps_position", null);
+  setLocalStorageItem(LOCAL_STORAGE_KEY_GPS_POSITION, null);
 }
 
 export const placeLinkIntoClipBoard = () => {
-  const location = getLocalStorageItem("gps_position");
+  const location = getLocalStorageItem(LOCAL_STORAGE_KEY_GPS_POSITION);
   const { lat, lon } = location;
-  const link = `${window.location.href}?lat=${lat}&lon=${lon}`;
+  const link = `${window.location.href}?${URL_PARAM_LAT}=${lat}&${URL_PARAM_LON}=${lon}`;
   return navigator.clipboard.writeText(link); // Promise
 }
 

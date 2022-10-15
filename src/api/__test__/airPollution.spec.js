@@ -1,6 +1,6 @@
 import fetchMock from "jest-fetch-mock";
 import { getAirPollutionByLatLon } from "../airPollution";
-import { ERROR_INVALID_LAT_LON } from "../common";
+import { ERROR_INVALID_LAT_LON } from "../../utils/constants";
 
 fetchMock.enableMocks();
 
@@ -28,7 +28,6 @@ export const fetchAirPolutionMockedResponse = {
     }
   ]
 };
-
 
 describe("AirPolutionAPI", () => {
   // Variables and function params for a success case

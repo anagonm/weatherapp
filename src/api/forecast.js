@@ -1,4 +1,5 @@
-import { BASE_URL_WEATHER, ERROR_INVALID_CITY, ERROR_INVALID_LAT_LON, fetchData } from "./common";
+import { fetchData } from "./common";
+import { ERROR_INVALID_LAT_LON, ERROR_INVALID_CITY, BASE_URL_WEATHER } from "../utils/constants";
 
 export const getForecastByLatLon = async (lat_, lon_) => {
   if (!lat_ || !lon_) {
