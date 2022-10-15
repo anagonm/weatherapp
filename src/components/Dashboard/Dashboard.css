@@ -426,6 +426,32 @@
   width: 200px;
 }
 
+.weather-detail {
+  position: relative;
+  padding: 36px 12px 12px;
+}
+
+.widget-actions {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.widget-actions button {
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 5px 8px;
+  border: 0;
+  cursor: pointer;
+  background: #ffffff;
+  margin-right: 6px;
+  border: 1px solid #204667;
+}
+
 
 
 /* TABLET */
@@ -470,25 +496,6 @@
 
   .flex-wrapper {
     align-items: flex-start;
-  }
-
-  .weather-detail {
-    position: relative;
-  }
-
-  .widget-actions {
-    position: absolute;
-    top: 8px;
-    right: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .widget-actions img {
-    cursor: pointer;
-    margin-right: 12px;
-    width: 18px;
   }
 
   .weather-detail, .weather-extra-wrapper, .flex-item {

@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React from "react";
 import './Dashboard.css';
 import { useWeather } from "../../providers/weatherContext";
 import CurrentWidget from "../widgets/CurrentWidget";
@@ -8,10 +8,11 @@ import DailyWidget from "../widgets/DailyWidget";
 import Modal from "../Modal";
 import Notification from "../Notification";
 import { getLocalStorageItem } from "../../utils";
+import Search from "../Search";
 // import Joyride from 'react-joyride';
 
 const Dashboard = () => {
-  const { modal, hideModal, searchByCity, setCity, city, weatherData, hideError, info, hideInfo } = useWeather();
+  const { modal, hideModal, weatherData, hideError, info, hideInfo } = useWeather();
 
   const renderError = (weatherData_) => {
     if (weatherData_ && weatherData_.error) {
@@ -31,31 +32,29 @@ const Dashboard = () => {
       <div className="main-wrapper">
         <div className="main-content">
           <div className="main-title">
-            <div className="search">
-              <input type='text' placeholder="Search by city..." value={city} onChange={(e) => setCity(e.target.value)}></input>
-              <button onClick={searchByCity} className="my-first-step">Search</button>
-            </div>
+            <Search />
             <div className="title">
               <h1>WeatherApp</h1>
             </div>
           </div>
+          {/* Forecast 5 days */}
           <DailyWidget />
           <h3 className="widget-title">More data from OpenWeather</h3>
           <div className="flex-wrapper">
+            {/* Sys */}
             <div className="flex-item widget">
               <AdditionalWidget />
             </div>
+            {/* AirPollution */}
             <div className="flex-item widget">
               <AirPollutionWidget />
             </div>
           </div>
         </div>
-
-        {/* Day detail current weather */}
+        {/* Current weather detail */}
         <div className="detail-content">
           <CurrentWidget />
         </div>
-
       </div>
 
       { renderError(weatherData) }

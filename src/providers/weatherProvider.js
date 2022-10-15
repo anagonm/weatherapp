@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as WeatherThunkActions from "../thunks/weather";
 import * as AirPollutionThunkActions from "../thunks/airPollution";
 import * as ForecastThunkActions from "../thunks/forecast";
-import { getLocalStorageItem, savePosition, setLocalStorageItem } from '../utils';
+import { getBrowserGeoPosition, getLocalStorageItem, getURLParam, placeLinkIntoClipBoard, savePosition, setLocalStorageItem } from '../utils';
 import * as WeatherActions from '../reducers/weather';
+
+const MESSAGE_URL_COPIED = "URL was copied to clipboard";
+
 
 export const WeatherProvider = ({ children }) => {
   // Redux state management
@@ -17,22 +20,11 @@ export const WeatherProvider = ({ children }) => {
 
   // Component states
   const [error, setError] = useState(undefined);
-  const [info, setInfo] = useState(undefined);
+  const [info, setInfo]   = useState(undefined);
   const [modal, setModal] = useState(true);
   const [city, setCity]   = useState('');
   const [lat, setLat]     = useState(undefined);
   const [lon, setLon]     = useState(undefined);
-
-  const [steps, setSteps] = useState([
-    {
-      target: '.my-first-step',
-      content: 'This is my awesome feature!',
-    },
-    {
-      target: '.my-other-step',
-      content: 'This another awesome feature!',
-    },
-  ])
 
   const hideModal = () => {
     setModal(prevState => !prevState);
@@ -43,18 +35,7 @@ export const WeatherProvider = ({ children }) => {
     dispatch(WeatherActions.setError(false));
   }
 
-  const getURLParam = (param) => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    return urlParams.get(param);
-  }
-
-  const resetApp = () => {
-    window.location.href = window.location.href.split("?")[0];
-    setLocalStorageItem("gps_position", null);
-  }
-
-  const getGeoPositon = () => {
+  const getGeoPositon = async () => {
     // A friend is sharing the link
     if (getURLParam('lat') && getURLParam('lon')) {
       setLat(getURLParam('lat'));
@@ -68,17 +49,15 @@ export const WeatherProvider = ({ children }) => {
       setLon(positionLocalStorage.lon);
     }
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        if (!positionLocalStorage) {
-          setLat(latitude);
-          setLon(longitude);
-          savePosition(latitude, longitude);
-        }
-      });
-    } else {
-      setError("It seems like your browser does not support HTML5 geolocation. Please install a different browser and enable javascript");
+    try {
+      const { latitude, longitude } = await getBrowserGeoPosition();
+      if (!positionLocalStorage) {
+        setLat(latitude);
+        setLon(longitude);
+        savePosition(latitude, longitude);
+      }
+    } catch(e) {
+      setError(e);
     }
   }
 
@@ -101,16 +80,10 @@ export const WeatherProvider = ({ children }) => {
     }
   }
 
-  const generateLink = () => {
-    const location = getLocalStorageItem("gps_position");
-    const { lat, lon } = location;
-    const text = `${window.location.href}?lat=${lat}&lon=${lon}`;
-    navigator.clipboard.writeText(text).then(
-      () => { 
-        console.log('@@@@ click to copy');
-        setInfo("Url copied to clipboard");
-      }
-    );
+  const copyShareUrl = () => {
+    placeLinkIntoClipBoard().then(() => { 
+      setInfo(MESSAGE_URL_COPIED);
+    });
   }
 
   const hideInfo = () => {
@@ -129,9 +102,7 @@ export const WeatherProvider = ({ children }) => {
     airPollutionData,
     forecast,
     searchByCity,
-    generateLink,
-    resetApp,
-    steps,
+    copyShareUrl
   };
 
   return (

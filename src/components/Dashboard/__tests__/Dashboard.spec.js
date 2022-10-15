@@ -13,8 +13,7 @@ describe("Dashboard", () => {
   const setLon = jest.fn();
   const dispatch = jest.fn();
   const searchByCity = jest.fn();
-  const generateLink = jest.fn();
-  const resetApp = jest.fn();
+  const copyShareUrl = jest.fn();
   const hideModal = jest.fn();
   const hideInfo = jest.fn();
 
@@ -44,9 +43,7 @@ describe("Dashboard", () => {
     },
     dispatch,
     searchByCity,
-    generateLink,
-    resetApp,
-    steps: [],
+    copyShareUrl,
     modal: false,
     hideModal,
     info: undefined,
@@ -77,7 +74,7 @@ describe("Dashboard", () => {
 
   it("hides the welcome modal after clicking continue", async() => {
     localStorage.clear();
-    renderComponent({...defaultContextValueMock, modal: true})
+    renderComponent({...defaultContextValueMock, modal: true })
 
     let modalContainer = screen.getByTestId("modal-container")
     expect(modalContainer).toBeVisible();

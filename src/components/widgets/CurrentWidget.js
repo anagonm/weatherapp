@@ -1,12 +1,12 @@
 import React from "react";
 import { useWeather } from "../../providers/weatherContext";
-import { convertKelvinToFahrenheit, getWeatherIcon } from "../../utils";
+import { convertKelvinToFahrenheit, getWeatherIcon, resetApp } from "../../utils";
 import Loader from "../Loader";
-import ShareIcon from "../../assets/share.png";
-import ResetIcon from "../../assets/reset.png"
+// import ShareIcon from "../../assets/share.png";
+// import ResetIcon from "../../assets/reset.png"
 
 const CurrentWidget = () => {
-  const { weatherData, generateLink, resetApp } = useWeather();
+  const { weatherData, copyShareUrl } = useWeather();
 
   if (weatherData.loading || Object.keys(weatherData.data).length === 0) {
     return <Loader />
@@ -21,8 +21,8 @@ const CurrentWidget = () => {
     <>
       <div className="widget weather-detail">
         <div className="widget-actions">
-          <img src={ResetIcon} onClick={resetApp} alt="reset icon" />
-          <img src={ShareIcon} onClick={generateLink} alt="share icon" />
+          <button onClick={resetApp}>Reset</button>
+          <button onClick={copyShareUrl}>Share</button>
         </div>
         <h2>{location}</h2>
         <img className="icon" src={getWeatherIcon(icon)} alt={icon} />

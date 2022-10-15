@@ -1,3 +1,5 @@
+const ERROR_BROWSER_GEOLOCATION_OFF = "It seems like your browser does not support HTML5 geolocation. Please install a different browser and enable javascript";
+
 export const getDay = date => new Date(date * 1000).getDate();
 
 export const getHour = date => (new Date(date * 1000).toLocaleTimeString("en-US"));
@@ -40,4 +42,35 @@ export const getLocalStorageItem = name => {
   }
 
   return null;
+}
+
+export const resetApp = () => {
+  window.location.href = window.location.href.split("?")[0]; // remove params from URL if any
+  setLocalStorageItem("gps_position", null);
+}
+
+export const placeLinkIntoClipBoard = () => {
+  const location = getLocalStorageItem("gps_position");
+  const { lat, lon } = location;
+  const link = `${window.location.href}?lat=${lat}&lon=${lon}`;
+  return navigator.clipboard.writeText(link); // Promise
+}
+
+export const getURLParam = param => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+}
+
+export const getBrowserGeoPosition = () => {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      return reject(ERROR_BROWSER_GEOLOCATION_OFF);
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      return resolve({ latitude, longitude })
+    });
+  });
 }
