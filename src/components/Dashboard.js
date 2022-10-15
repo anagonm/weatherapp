@@ -1,26 +1,37 @@
 import React from "react";
-import './Dashboard.css';
-import { useWeather } from "../../providers/weatherContext";
-import CurrentWidget from "../widgets/CurrentWidget";
-import AirPollutionWidget from "../widgets/AirPollutionWidget";
-import AdditionalWidget from "../widgets/AdditionalWidget";
-import DailyWidget from "../widgets/DailyWidget";
-import Modal from "../Modal";
-import Notification from "../Notification";
-import { getLocalStorageItem } from "../../utils";
-import Search from "../Search";
+import '../styles/Dashboard.css';
+import { useWeather } from "../providers/weatherContext";
+import CurrentWidget from "./widgets/CurrentWidget";
+import AirPollutionWidget from "./widgets/AirPollutionWidget";
+import AdditionalWidget from "./widgets/AdditionalWidget";
+import DailyWidget from "./widgets/DailyWidget";
+import Modal from "./Modal";
+import Notification from "./Notification";
+import { getLocalStorageItem } from "../utils";
+import { LOCAL_STORAGE_KEY_WELCOME_MODAL } from "../utils/constants";
+import Search from "./Search";
 
 const Dashboard = () => {
   const { modal, hideModal, weatherData, hideError, info, hideInfo } = useWeather();
 
-  const renderError = (weatherData_) => {
-    if (weatherData_ && weatherData_.error) {
-      return <Notification message={weatherData_.error} hideNotification={hideError} type="error" />
+  const renderErrorIfAny = () => {
+    if (weatherData && weatherData.error) {
+      return <Notification message={weatherData.error} hideNotification={hideError} type="error" />
     }
   }
 
-  const renderModal = () => {
-    const welcomeModal = getLocalStorageItem("welcomeModal");
+  const renderNotificationIfAny = () => {
+    if (info) {
+      return <Notification message={info} hideNotification={hideInfo} type="info" />
+    }
+  }
+
+  const renderModalIfNeeded = () => {
+    if (!modal) {
+      return;
+    }
+
+    const welcomeModal = getLocalStorageItem(LOCAL_STORAGE_KEY_WELCOME_MODAL);
     if (!welcomeModal) {
       return <Modal hideModal={hideModal} />
     }
@@ -56,9 +67,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      { renderError(weatherData) }
-      { modal && renderModal() }
-      { info && <Notification message={info} hideNotification={hideInfo} type="info" /> }
+      { renderErrorIfAny() }
+      { renderModalIfNeeded() }
+      { renderNotificationIfAny() }
 
     </div>
   )

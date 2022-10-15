@@ -8,6 +8,10 @@ import Loader from "../Loader";
 const CurrentWidget = () => {
   const { weatherData, copyShareUrl } = useWeather();
 
+  if (!weatherData || !weatherData.data) {
+    return <Loader />
+  }
+
   if (weatherData.loading || Object.keys(weatherData.data).length === 0) {
     return <Loader />
   }
@@ -24,7 +28,7 @@ const CurrentWidget = () => {
           <button onClick={resetApp}>Reset</button>
           <button onClick={copyShareUrl}>Share</button>
         </div>
-        <h2>{location}</h2>
+        <h2 data-testid="city-name">{location}</h2>
         <img className="icon" src={getWeatherIcon(icon)} alt={icon} />
         <p>{description}</p>
         <h3>{convertKelvinToFahrenheit(temp)}º</h3>

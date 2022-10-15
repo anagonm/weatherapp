@@ -1,4 +1,4 @@
-import { ERROR_BROWSER_GEOLOCATION_OFF, LOCAL_STORAGE_KEY_GPS_POSITION, URL_PARAM_LAT, URL_PARAM_LON } from "./constants";
+import { ERROR_BROWSER_GEOLOCATION_OFF, LOCAL_STORAGE_KEY_GPS_POSITION, LOCAL_STORAGE_KEY_WELCOME_MODAL, URL_PARAM_LAT, URL_PARAM_LON } from "./constants";
 
 export const getDay = date => new Date(date * 1000).getDate();
 
@@ -46,6 +46,7 @@ export const getLocalStorageItem = name => {
 export const resetApp = () => {
   window.location.href = window.location.href.split("?")[0]; // remove params from URL if any
   setLocalStorageItem(LOCAL_STORAGE_KEY_GPS_POSITION, null);
+  setLocalStorageItem(LOCAL_STORAGE_KEY_WELCOME_MODAL, null);
 }
 
 export const placeLinkIntoClipBoard = () => {

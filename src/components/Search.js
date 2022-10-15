@@ -5,8 +5,8 @@ const Search = () => {
   const { city, setCity, searchByCity } = useWeather();
   return (
     <div className="search">
-      <input type='text' placeholder="Search by city..." value={city} onChange={(e) => setCity(e.target.value)}></input>
-      <button onClick={searchByCity} className="my-first-step">Search</button>
+      <input data-testid="input-search-by-city" type='text' placeholder="Search by city..." value={city} onChange={(e) => setCity(e.target.value)}></input>
+      <button onClick={searchByCity} className="my-first-step" data-testid="btn-search">Search</button>
     </div>
   );
 }
