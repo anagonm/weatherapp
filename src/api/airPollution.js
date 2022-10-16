@@ -3,7 +3,8 @@ import { fetchData } from "./common";
 
 export const getAirPollutionByLatLon = async (lat_, lon_) => {
   if (!lat_ || !lon_) {
-    throw ERROR_INVALID_LAT_LON;
+    const error = { message: ERROR_INVALID_LAT_LON };
+    throw error;
   }
 
   const baseUrl = BASE_URL_WEATHER + "/air_pollution";

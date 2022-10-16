@@ -14,26 +14,21 @@ export const forecastSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getForecastByLatLon.pending]: (state) => {
-      console.log("DEBUG @@", 1)
       state.loading = true
     },
     [getForecastByLatLon.fulfilled]: (state, { payload }) => {
-      console.log("DEBUG @@", 2)
       state.loading = false
       state.data = payload
     },
     [getForecastByLatLon.rejected]: (state, { payload }) => {
-      console.log("DEBUG @@", 3)
       const { message } = payload;
       state.error = message;
       state.loading = false
     },
     [getForecastByCity.pending]: (state) => {
-      console.log("DEBUG @@", 4)
       state.loading = true
     },
     [getForecastByCity.fulfilled]: (state, { payload }) => {
-      console.log("DEBUG @@", 5)
       state.loading = false;
       state.data = payload
     },

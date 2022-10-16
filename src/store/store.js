@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import weatherReducer from '../reducers/weather';
 import airPollutionReducer from '../reducers/airPollution';
 import forecastReducer from '../reducers/forecast';

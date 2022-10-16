@@ -30,6 +30,7 @@ export const WeatherProvider = ({ children }) => {
   }
 
   const hideError = () => {
+    setError(undefined);
     dispatch(WeatherActions.setError(false));
   }
 
@@ -84,18 +85,20 @@ export const WeatherProvider = ({ children }) => {
     });
   }
 
-  const hideInfo = () => {
-    setInfo(undefined);
-  }
-
   const contextValue = {
     dispatch,
-    error, hideError,
-    city, setCity,
-    lat, setLat,
-    lon, setLon,
-    modal, hideModal,
-    info, hideInfo,
+    error,
+    hideError,
+    city,
+    setCity,
+    lat,
+    setLat,
+    lon,
+    setLon,
+    modal,
+    hideModal,
+    info,
+    setInfo,
     weatherData,
     airPollutionData,
     forecast,
