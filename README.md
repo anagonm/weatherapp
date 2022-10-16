@@ -1,18 +1,43 @@
-# Useful Links
-
-# https://openweathermap.org/api/one-call-3
-# https://www.tutorialrepublic.com/html-tutorial/html5-geolocation.php
-# https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
-
-# Getting Started with Create React App
+# WeatherApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+![alt text](https://github.com/anagonm/weatherapp/blob/main/public/image1.png?raw=true)
+![alt text](https://github.com/anagonm/weatherapp/blob/main/public/image2.png?raw=true)
+![alt text](https://github.com/anagonm/weatherapp/blob/main/public/image3.png?raw=true)
+![alt text](https://github.com/anagonm/weatherapp/blob/main/public/image4.png?raw=true)
+
+# Features
+
+- See weather by latitude and longitude
+- See weather by city
+- Allows to share with friends
+- Get forecast data for next days
+
+# Useful Links
+
+- https://openweathermap.org/api/one-call-3
+- https://www.tutorialrepublic.com/html-tutorial/html5-geolocation.php
+- https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+- https://blog.logrocket.com/using-redux-toolkits-createasyncthunk/
+- https://redux.js.org/introduction/why-rtk-is-redux-today
+- https://polvara.me/posts/mocking-context-with-react-testing-library
+
+
+# Dependencies
+
+- Redux
+- Redux Toolkit
+- Jest
+- testing-library
+- React
+- React Redux
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -20,7 +45,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `yarn run test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
