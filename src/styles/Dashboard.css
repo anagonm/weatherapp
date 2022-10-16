@@ -1,6 +1,6 @@
 :root {
   --white: #FFFFFF;
-  --dark-blue: #1B63A2;
+  --blue: #1B63A2;
   --medium-blue: #204667;
   --light-blue: #D5EBF4;
   --light-gray: #F8F7FC;
@@ -16,7 +16,7 @@
 }
 
 .main-container {
-  color: var(--dark-blue);
+  color: var(--blue);
   position: relative;
 }
 
@@ -145,7 +145,7 @@
 }
 
 .weather-detail {
-  color: var(--dark-blue);
+  color: var(--blue);
   background: var(--light-blue);
   display: flex;
   justify-content: center;
@@ -240,7 +240,7 @@
   width: 70px;
   height: 80px;
   position: relative;
-  color: var(--dark-blue);
+  color: var(--blue);
   border-radius: 6px;
   padding: 12px;
   display: flex;
@@ -384,6 +384,10 @@
   padding: 0;
 }
 
+.modal-body ul li {
+  margin-bottom: 6px;
+}
+
 .modal-body ul li:last-child {
   margin-bottom: 24px;
 }
@@ -459,7 +463,7 @@
   cursor: pointer;
   background: var(--white);
   margin-right: 6px;
-  border: 1px solid var(--dark-blue);
+  border: 1px solid var(--blue);
   transition: 0.5s;
 }
 

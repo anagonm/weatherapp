@@ -10,4 +10,4 @@ export const fetchData = async (url, params) => {
   }
 
   throw response;
-}
+};

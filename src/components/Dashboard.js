@@ -1,18 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import '../styles/Dashboard.css';
-import { printMessageHook, useWeather } from "../providers/weatherContext";
-import CurrentWidget from "./widgets/CurrentWidget";
-import AirPollutionWidget from "./widgets/AirPollutionWidget";
-import AdditionalWidget from "./widgets/AdditionalWidget";
-import DailyWidget from "./widgets/DailyWidget";
-import Modal from "./Modal";
-import Notification from "./Notification";
 import { getLocalStorageItem } from "../utils";
 import { LOCAL_STORAGE_KEY_WELCOME_MODAL } from "../utils/constants";
+import { useWeather } from "../providers/weatherContext";
+import AirPollutionWidget from "./widgets/AirPollutionWidget";
+import AdditionalWidget from "./widgets/AdditionalWidget";
+import CurrentWidget from "./widgets/CurrentWidget";
+import DailyWidget from "./widgets/DailyWidget";
+import Notification from "./Notification";
 import Search from "./Search";
+import Modal from "./Modal";
 
 const Dashboard = () => {
-  const { modal, hideModal, weatherData, error, hideError, info, setInfo } = useWeather();
+  const {
+    modal,
+    hideModal,
+    weatherData,
+    error,
+    hideError,
+    info,
+    setInfo
+  } = useWeather();
 
   const renderErrorIfAny = () => {
     if ((weatherData && weatherData.error) || error) {

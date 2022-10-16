@@ -15,7 +15,6 @@ describe('airPollutionReducer', () => {
     expect(store.getState()).toEqual({
       loading: false,
       error: undefined,
-      success: false,
       data: { sample: "info" }
     });
   });
@@ -28,7 +27,6 @@ describe('airPollutionReducer', () => {
     expect(store.getState()).toEqual({
       loading: false,
       error: "my error",
-      success: false,
       data: {}
     });
   });

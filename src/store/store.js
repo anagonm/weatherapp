@@ -9,4 +9,4 @@ export const store = configureStore({
     airPollution: airPollutionReducer,
     forecast: forecastReducer,
   },
-})
+});

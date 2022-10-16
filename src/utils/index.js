@@ -1,4 +1,9 @@
-import { ERROR_BROWSER_GEOLOCATION_OFF, LOCAL_STORAGE_KEY_GPS_POSITION, LOCAL_STORAGE_KEY_WELCOME_MODAL, URL_PARAM_LAT, URL_PARAM_LON } from "./constants";
+import {
+  ERROR_BROWSER_GEOLOCATION_OFF,
+  LOCAL_STORAGE_KEY_GPS_POSITION,
+  LOCAL_STORAGE_KEY_WELCOME_MODAL,
+  URL_PARAM_LAT, URL_PARAM_LON
+} from "./constants";
 
 export const getDay = date => new Date(date * 1000).getDate();
 
@@ -9,11 +14,11 @@ export const getMonth = date => {
 }
 
 export const convertKelvinToFahrenheit = k => {
-  return Math.trunc(((k-273.15)*1.8)+32)
+  return Math.trunc(((k-273.15)*1.8)+32);
 }
 
 export const getWeatherIcon = icon => {
-  return `https://openweathermap.org/img/wn/${icon}@2x.png`
+  return `https://openweathermap.org/img/wn/${icon}@2x.png`;
 }
 
 export const savePosition = (lat, lon) => {
@@ -39,7 +44,6 @@ export const getLocalStorageItem = name => {
   if (data) {
     return JSON.parse(data);
   }
-
   return null;
 }
 

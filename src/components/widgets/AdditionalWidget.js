@@ -1,9 +1,9 @@
 import React  from "react";
 import { useWeather } from "../../providers/weatherContext";
 import { getHour } from "../../utils";
-import Loader from "../Loader";
-import Sunset from "../../assets/sunset.png"
 import Sunrise from "../../assets/sunrise.png"
+import Sunset from "../../assets/sunset.png"
+import Loader from "../Loader";
 
 const AdditionalWidget = () => {
   const { weatherData } = useWeather();

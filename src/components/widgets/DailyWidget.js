@@ -1,12 +1,10 @@
 import React from "react";
 import { useWeather } from "../../providers/weatherContext";
-import Loader from "../Loader";
 import DailyDetail from "./DailyDetail";
+import Loader from "../Loader";
 
 const DailyWidget = () => {
   const { forecast } = useWeather();
-
-  console.log('forecast', forecast)
 
   if (!forecast || !forecast.data) {
     return <Loader />;
