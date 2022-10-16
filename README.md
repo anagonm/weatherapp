@@ -23,7 +23,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - https://redux.js.org/introduction/why-rtk-is-redux-today
 - https://polvara.me/posts/mocking-context-with-react-testing-library
 
-
 # Dependencies
 
 - Redux
@@ -49,6 +48,13 @@ You may also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn test --coverage --watchAll`
+
+Run the tests and reports the coverage
+
+![alt text](https://github.com/anagonm/weatherapp/blob/main/public/coverage.png?raw=true)
+
 
 ### `npm run build`
 
