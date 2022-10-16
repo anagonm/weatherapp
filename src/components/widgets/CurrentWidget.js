@@ -1,9 +1,11 @@
 import React from "react";
 import { useWeather } from "../../providers/weatherContext";
-import { convertKelvinToFahrenheit, getWeatherIcon, resetApp } from "../../utils";
+import {
+  convertKelvinToFahrenheit,
+  getWeatherIcon,
+  resetApp
+} from "../../utils";
 import Loader from "../Loader";
-// import ShareIcon from "../../assets/share.png";
-// import ResetIcon from "../../assets/reset.png"
 
 const CurrentWidget = () => {
   const { weatherData, copyShareUrl } = useWeather();

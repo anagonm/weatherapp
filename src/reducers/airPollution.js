@@ -1,10 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { getAirPollutionByLatLon } from '../thunks/airPollution'
+import { createSlice } from '@reduxjs/toolkit';
+import { getAirPollutionByLatLon } from '../thunks/airPollution';
 
 const initialState = {
   loading: false,
   error: undefined,
-  success: false,
   data: {}
 }
 
@@ -14,20 +13,20 @@ export const airPollutionSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getAirPollutionByLatLon.pending]: (state) => {
-      state.loading = true
+      state.loading = true;
     },
     [getAirPollutionByLatLon.fulfilled]: (state, { payload }) => {
-      state.loading = false
-      state.data = payload
+      state.loading = false;
+      state.data = payload;
     },
     [getAirPollutionByLatLon.rejected]: (state, { payload }) => {
       const { message } = payload;
       state.error = message;
-      state.loading = false
+      state.loading = false;
     },
   }
 })
 
 // export const { setLoading, setData } = weatherSlice.actions
 
-export default airPollutionSlice.reducer
+export default airPollutionSlice.reducer;

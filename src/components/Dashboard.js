@@ -1,28 +1,40 @@
 import React from "react";
 import '../styles/Dashboard.css';
-import { useWeather } from "../providers/weatherContext";
-import CurrentWidget from "./widgets/CurrentWidget";
-import AirPollutionWidget from "./widgets/AirPollutionWidget";
-import AdditionalWidget from "./widgets/AdditionalWidget";
-import DailyWidget from "./widgets/DailyWidget";
-import Modal from "./Modal";
-import Notification from "./Notification";
 import { getLocalStorageItem } from "../utils";
 import { LOCAL_STORAGE_KEY_WELCOME_MODAL } from "../utils/constants";
+import { useWeather } from "../providers/weatherContext";
+import AirPollutionWidget from "./widgets/AirPollutionWidget";
+import AdditionalWidget from "./widgets/AdditionalWidget";
+import CurrentWidget from "./widgets/CurrentWidget";
+import DailyWidget from "./widgets/DailyWidget";
+import Notification from "./Notification";
 import Search from "./Search";
+import Modal from "./Modal";
 
 const Dashboard = () => {
-  const { modal, hideModal, weatherData, hideError, info, hideInfo } = useWeather();
+  const {
+    modal,
+    hideModal,
+    weatherData,
+    error,
+    hideError,
+    info,
+    setInfo
+  } = useWeather();
 
   const renderErrorIfAny = () => {
-    if (weatherData && weatherData.error) {
-      return <Notification message={weatherData.error} hideNotification={hideError} type="error" />
+    if ((weatherData && weatherData.error) || error) {
+      let withError = error;
+      if (weatherData && weatherData.error) {
+        withError = weatherData.error;
+      }
+      return <Notification message={withError} hideNotification={hideError} type="error" />
     }
   }
 
   const renderNotificationIfAny = () => {
     if (info) {
-      return <Notification message={info} hideNotification={hideInfo} type="info" />
+      return <Notification message={info} hideNotification={() => setInfo(undefined)} type="info" />
     }
   }
 

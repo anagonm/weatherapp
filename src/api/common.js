@@ -5,9 +5,9 @@ export const fetchData = async (url, params) => {
   const rawResponse = await fetch(fullUrl);
   const response = await rawResponse.json();
 
-  if (rawResponse.status === 200) {
+  if (rawResponse.status === 200) { // OK
     return response
   }
 
   throw response;
-}
+};

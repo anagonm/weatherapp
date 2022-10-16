@@ -19,7 +19,7 @@ describe('Dashboard', () => {
   const searchByCity = jest.fn();
   const copyShareUrl = jest.fn();
   const hideModal = jest.fn();
-  const hideInfo = jest.fn();
+  const setInfo = jest.fn();
 
   const defaultContextValueMock = {
     error: undefined,
@@ -51,7 +51,7 @@ describe('Dashboard', () => {
     modal: false,
     hideModal,
     info: undefined,
-    hideInfo,
+    setInfo,
   };
 
   const renderComponent = (contextValue = defaultContextValueMock) => {

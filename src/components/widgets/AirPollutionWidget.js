@@ -47,27 +47,27 @@ const AirPollutionWidget = () => {
             <p>{components.no}</p>
           </div>
           <div className="air-data">
-            <span>3</span>
+            <span>4</span>
             <h4>No2</h4>
             <p>{components.no2}</p>
           </div>
           <div className="air-data">
-            <span>3</span>
+            <span>5</span>
             <h4>O3</h4>
             <p>{components.o3}</p>
           </div>
           <div className="air-data">
-            <span>3</span>
+            <span>6</span>
             <h4>Pm2 5</h4>
             <p>{components.pm2_5}</p>
           </div>
           <div className="air-data">
-            <span>3</span>
+            <span>7</span>
             <h4>Pm 10</h4>
             <p>{components.pm10}</p>
           </div>
           <div className="air-data">
-            <span>3</span>
+            <span>8</span>
             <h4>So2</h4>
             <p>{components.so2}</p>
           </div>

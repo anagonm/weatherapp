@@ -1,16 +1,15 @@
 import React from "react";
-import { convertKelvinToFahrenheit, getDay, getHour, getMonth, getWeatherIcon } from "../../utils";
+import {
+  convertKelvinToFahrenheit,
+  getDay,
+  getHour,
+  getMonth,
+  getWeatherIcon
+} from "../../utils";
 
 const DailyDetail = ({ data }) => {
-  const {
-    dt,
-    clouds, // { all }
-    main, // feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_max, temp_min
-    // pop,
-    // rain, // 3h
-    weather, // [{description, icon, main}]
-    // wind // deg, gust, speed
-  } = data;
+  const { dt, clouds, main, weather } = data;
+
   return (
     <div className="widget daily-item">
       <p>{getMonth(dt)} {getDay(dt)}</p>

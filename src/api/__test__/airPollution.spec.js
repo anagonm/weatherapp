@@ -53,6 +53,6 @@ describe("AirPolutionAPI", () => {
       result = e
     }
 
-    expect(result).toMatch(ERROR_INVALID_LAT_LON);
+    expect(result).toEqual({message: ERROR_INVALID_LAT_LON});
   })
 })

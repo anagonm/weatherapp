@@ -1616,7 +1616,7 @@ describe("forecastApi", () => {
     } catch(e) {
       result = e
     }
-    expect(result).toMatch(ERROR_INVALID_CITY);
+    expect(result).toEqual({message: ERROR_INVALID_CITY});
   })
 
   it("returns an error if missing lat and lon", async () => {
@@ -1628,7 +1628,7 @@ describe("forecastApi", () => {
       result = e
     }
 
-    expect(result).toMatch(ERROR_INVALID_LAT_LON);
+    expect(result).toEqual({message: ERROR_INVALID_LAT_LON});
   })
 
 })

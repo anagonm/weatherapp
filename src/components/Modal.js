@@ -15,11 +15,11 @@ const Modal = ({ hideModal }) => {
           <div className="modal-body">
             <h3>App Features</h3>
             <ul>
-              <li>- Get real time weather with Geolocation</li>
-              <li>- Search weather by city</li>
-              <li>- Forecast 5 days / 3 hours</li>
-              <li>- Air Pollution from Geolocation</li>
-              <li>- Share current location weather with friends</li>
+              <li>Get real time weather with Geolocation.</li>
+              <li>Search weather by city.</li>
+              <li>Forecast 5 days / 3 hours.</li>
+              <li>Air Pollution from Geolocation.</li>
+              <li>Share current location weather with friends.</li>
             </ul>
           </div>
           <img src={MapImg} alt="map"/>

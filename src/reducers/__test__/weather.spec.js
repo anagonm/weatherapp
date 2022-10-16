@@ -15,7 +15,6 @@ describe('weatherReducer', () => {
     expect(store.getState()).toEqual({
       loading: false,
       error: undefined,
-      success: false,
       data: { sample: "info" }
     });
   });
@@ -28,7 +27,6 @@ describe('weatherReducer', () => {
     expect(store.getState()).toEqual({
       loading: false,
       error: "my error",
-      success: false,
       data: {}
     });
   });
@@ -41,20 +39,18 @@ it('should post data fulfilled with city', async () => {
   expect(store.getState()).toEqual({
     loading: false,
     error: undefined,
-    success: false,
     data: { sample: "info" }
   });
 });
 
 it('should get the error when rejected with city', async () => {
-  jest.spyOn(WeatherAPI, "getWeatherByCity").mockRejectedValueOnce({ message: "my error"});
+  jest.spyOn(WeatherAPI, "getWeatherByCity").mockRejectedValueOnce({ message: "my error" });
   const store = configureStore({ reducer: weatherSlice.reducer });
-  await store.dispatch(getWeatherByCity('Miamiii'));
-  expect(WeatherAPI.getWeatherByCity).toHaveBeenCalledWith(1, 1);
+  await store.dispatch(getWeatherByCity({city: 'InvalidCityName'}));
+  expect(WeatherAPI.getWeatherByCity).toHaveBeenCalledWith("InvalidCityName");
   expect(store.getState()).toEqual({
     loading: false,
     error: "my error",
-    success: false,
     data: {}
   });
 });

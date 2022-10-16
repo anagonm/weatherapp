@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { WeatherContext } from './weatherContext';
 import { useDispatch, useSelector } from 'react-redux';
+import { WeatherContext } from './weatherContext';
 import * as WeatherThunkActions from "../thunks/weather";
 import * as AirPollutionThunkActions from "../thunks/airPollution";
 import * as ForecastThunkActions from "../thunks/forecast";
-import { getBrowserGeoPosition, getLocalStorageItem, getURLParam, placeLinkIntoClipBoard, savePosition, setLocalStorageItem } from '../utils';
 import * as WeatherActions from '../reducers/weather';
 import * as Constants from '../utils/constants';
+import * as Utils from '../utils';
 
 export const WeatherProvider = ({ children }) => {
   // Redux state management
   const dispatch = useDispatch();
   const weatherData       = useSelector(state => state.weather);
   const airPollutionData  = useSelector(state => state.airPollution);
-  const forecast          = useSelector(state => state.forecast)
+  const forecast          = useSelector(state => state.forecast);
 
   // Component states
   const [error, setError] = useState(undefined);
@@ -26,33 +26,34 @@ export const WeatherProvider = ({ children }) => {
 
   const hideModal = () => {
     setModal(prevState => !prevState);
-    setLocalStorageItem(Constants.LOCAL_STORAGE_KEY_WELCOME_MODAL, true);
+    Utils.setLocalStorageItem(Constants.LOCAL_STORAGE_KEY_WELCOME_MODAL, true);
   }
 
   const hideError = () => {
+    setError(undefined);
     dispatch(WeatherActions.setError(false));
   }
 
   const getGeoPositon = async () => {
     // A friend is sharing the link
-    if (getURLParam(Constants.URL_PARAM_LAT) && getURLParam(Constants.URL_PARAM_LON)) {
-      setLat(getURLParam(Constants.URL_PARAM_LAT));
-      setLon(getURLParam(Constants.URL_PARAM_LON));
+    if (Utils.getURLParam(Constants.URL_PARAM_LAT) && Utils.getURLParam(Constants.URL_PARAM_LON)) {
+      setLat(Utils.getURLParam(Constants.URL_PARAM_LAT));
+      setLon(Utils.getURLParam(Constants.URL_PARAM_LON));
       return;
     }
 
-    const positionLocalStorage = getLocalStorageItem(Constants.LOCAL_STORAGE_KEY_GPS_POSITION);
+    const positionLocalStorage = Utils.getLocalStorageItem(Constants.LOCAL_STORAGE_KEY_GPS_POSITION);
     if (positionLocalStorage !== null) {
       setLat(positionLocalStorage.lat);
       setLon(positionLocalStorage.lon);
     }
 
     try {
-      const { latitude, longitude } = await getBrowserGeoPosition();
+      const { latitude, longitude } = await Utils.getBrowserGeoPosition();
       if (!positionLocalStorage) {
         setLat(latitude);
         setLon(longitude);
-        savePosition(latitude, longitude);
+        Utils.savePosition(latitude, longitude);
       }
     } catch(e) {
       setError(e);
@@ -79,23 +80,25 @@ export const WeatherProvider = ({ children }) => {
   }
 
   const copyShareUrl = () => {
-    placeLinkIntoClipBoard().then(() => { 
+    Utils.placeLinkIntoClipBoard().then(() => { 
       setInfo(Constants.MESSAGE_URL_COPIED);
     });
   }
 
-  const hideInfo = () => {
-    setInfo(undefined);
-  }
-
   const contextValue = {
     dispatch,
-    error, hideError,
-    city, setCity,
-    lat, setLat,
-    lon, setLon,
-    modal, hideModal,
-    info, hideInfo,
+    error,
+    hideError,
+    city,
+    setCity,
+    lat,
+    setLat,
+    lon,
+    setLon,
+    modal,
+    hideModal,
+    info,
+    setInfo,
     weatherData,
     airPollutionData,
     forecast,

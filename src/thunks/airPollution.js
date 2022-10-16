@@ -5,6 +5,6 @@ export const getAirPollutionByLatLon = createAsyncThunk('airPollution/getAirPoll
   try {
     return await AirPollutionAPI.getAirPollutionByLatLon(lat, lon);
   } catch (e) {
-    return rejectWithValue(e)
+    return rejectWithValue(e);
   }
 });

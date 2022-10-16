@@ -5,7 +5,7 @@ import * as ForecastAPI from '../api/forecast';
 export const getForecastByLatLon = createAsyncThunk('forecast/getForecast', async ({lat, lon}, { rejectWithValue }) => {
   try {
     return await ForecastAPI.getForecastByLatLon(lat, lon);
-  } catch (e) {
+  } catch (e) { // => {message, cod}
     return rejectWithValue(e);
   }
 });
