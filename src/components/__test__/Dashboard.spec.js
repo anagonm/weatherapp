@@ -5,78 +5,16 @@ import { Provider } from 'react-redux';
 import { fetchAirPolutionMockedResponse } from '../../api/__test__/airPollution.spec';
 import { forecastApiMockedResponse } from '../../api/__test__/forecast.spec';
 import { weatherApiMockedResponse } from '../../api/__test__/weather.spec';
-import { WeatherContext } from '../../providers/weatherContext';
+import * as WeatherAPI from '../../api/weather';
+import * as ForecastAPI from '../../api/forecast';
+import * as AirPollutionAPI from '../../api/airPollution';
+import * as Utils from '../../utils/index';
 import { WeatherProvider } from '../../providers/weatherProvider';
 import { store } from '../../store/store';
 import Dashboard from '../Dashboard';
+import { act } from 'react-dom/test-utils';
 
 describe('Dashboard', () => {
-  const hideError = jest.fn();
-  const setCity = jest.fn();
-  const setLat = jest.fn();
-  const setLon = jest.fn();
-  const dispatch = jest.fn();
-  const searchByCity = jest.fn();
-  const copyShareUrl = jest.fn();
-  const hideModal = jest.fn();
-  const setInfo = jest.fn();
-
-  const defaultContextValueMock = {
-    error: undefined,
-    hideError,
-    city: '',
-    setCity,
-    lat: -80.1747,
-    setLat,
-    lon: 25.9445,
-    setLon,
-    weatherData: {
-      loading: false,
-      error: false,
-      data: weatherApiMockedResponse,
-    },
-    airPollutionData: {
-      loading: false,
-      error: false,
-      data: fetchAirPolutionMockedResponse,
-    },
-    forecast: {
-      loading: false,
-      error: false,
-      data: forecastApiMockedResponse,
-    },
-    dispatch,
-    searchByCity,
-    copyShareUrl,
-    modal: false,
-    hideModal,
-    info: undefined,
-    setInfo,
-  };
-
-  const renderComponent = (contextValue = defaultContextValueMock) => {
-    render(
-      // eslint-disable-next-line react/jsx-filename-extension
-      <WeatherContext.Provider value={contextValue}>
-        <Dashboard />
-      </WeatherContext.Provider>,
-    );
-  };
-
-  it('renders the dashboard', () => {
-    renderComponent();
-    const divMainContainer = screen.getByTestId('main-container');
-    // console.log(screen.debug());
-    expect(divMainContainer).toBeVisible();
-  });
-
-  it('renders welcome modal', () => {
-    localStorage.clear();
-    renderComponent({ ...defaultContextValueMock, modal: true });
-    const modalContainer = screen.getByTestId('modal-container');
-    expect(modalContainer).toBeVisible();
-  });
-
   it('hides the welcome modal after clicking continue x', async () => {
     const wrapper = ({ children }) => (
       <Provider store={store}>
@@ -97,4 +35,71 @@ describe('Dashboard', () => {
 
     expect(modalContainer).not.toBeVisible();
   });
+
+  describe("Search", () => {
+    it("search by city and the new data is update in the view", async () => {
+      jest.spyOn(ForecastAPI, "getForecastByCity").mockImplementation(( ) => {
+        return Promise.resolve({...forecastApiMockedResponse,
+          city: {
+            ...forecastApiMockedResponse.city,
+            name: "Madrid"
+          }
+          });
+      });
+
+      jest.spyOn(ForecastAPI, "getForecastByLatLon").mockImplementation(( ) => {
+        return Promise.resolve({...forecastApiMockedResponse });
+      });
+
+      jest.spyOn(AirPollutionAPI, "getAirPollutionByLatLon").mockImplementation(() => {
+        return Promise.resolve({...fetchAirPolutionMockedResponse})
+      })
+
+      jest.spyOn(WeatherAPI, "getWeatherByCity").mockImplementation(( ) => {
+        return Promise.resolve({...weatherApiMockedResponse, name: "Madrid"});
+      });
+
+      jest.spyOn(WeatherAPI, "getWeatherByLatLon").mockImplementation(( ) => {
+        return Promise.resolve({...weatherApiMockedResponse});
+      });
+
+      jest.spyOn(Utils, "getBrowserGeoPosition").mockImplementation(() => {
+        return Promise.resolve({ latitude: 100, longitude: 100 })
+      });
+
+      jest.spyOn(Utils, "getLocalStorageItem").mockImplementation(() => {
+        return { lat: 100, lon: 100 }
+      });
+
+      const wrapper = ({ children }) => (
+        <Provider store={store}>
+          <WeatherProvider>
+            {children}
+          </WeatherProvider>
+        </Provider>
+      );
+
+      // eslint-disable-next-line testing-library/no-unnecessary-act
+      render(<Dashboard />, { wrapper });
+  
+      const searchInput = screen.getByTestId('input-search-by-city');
+      const searchButton = screen.getByTestId('btn-search');
+
+      fireEvent.change(searchInput, {target: { value: 'Madrid' }});
+
+      // eslint-disable-next-line testing-library/no-unnecessary-act
+      await act(async () => {
+        await fireEvent.click(searchButton);
+      });
+
+      expect(ForecastAPI.getForecastByCity).toHaveBeenCalled()
+
+      const locationWeather = screen.getByTestId('city-name');
+      await screen.findByText('Madrid')
+      expect(locationWeather.textContent).toEqual('Madrid');
+
+    });
+  })
+
+
 });
