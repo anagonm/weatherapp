@@ -11,7 +11,7 @@ import * as Utils from '../utils';
 
 export const WeatherProvider = ({ children }) => {
   // Redux state management
-  const dispatch = useDispatch();
+  const dispatch          = useDispatch();
   const weatherData       = useSelector(state => state.weather);
   const airPollutionData  = useSelector(state => state.airPollution);
   const forecast          = useSelector(state => state.forecast);

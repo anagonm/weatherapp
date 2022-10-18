@@ -9,6 +9,10 @@ import {
 } from "../../utils";
 
 const DailyDetail = ({ data }) => {
+  if (!data) {
+    return null;
+  }
+
   const { dt, clouds, main, weather } = data;
 
   return (
