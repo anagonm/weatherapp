@@ -27,14 +27,14 @@ const AirPollutionWidget = () => {
   return (
     <>
       <div className="air-title">
-        <h4>Your Current Air Pollution</h4>
+        <h4 data-testid="airpollution-widget-title">Your Current Air Pollution</h4>
         <h3>{airPollutionQuality[quality]}</h3>
       </div>
       <div className="flex-wrap">
           <div className="air-data">
             <span>1</span>
             <h4>CO</h4>
-            <p>{components.co}</p>
+            <p data-testid="airpollution-co">{components.co}</p>
           </div>
           <div className="air-data">
             <span>2</span>

@@ -1,4 +1,4 @@
-export const API_KEY          = "bf1548ea41975ce03a084e2e8c1501bf";
+export const API_KEY          = process.env['REACT_APP_API_KEY'];
 export const BASE_URL_WEATHER = "https://api.openweathermap.org/data/2.5";
 
 export const URL_PARAM_LAT = "lat";

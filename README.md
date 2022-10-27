@@ -14,6 +14,37 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Allows to share with friends
 - Get forecast data for next days
 
+# Running the project
+
+- Add an .env file locally with the following value:
+```
+REACT_APP_API_KEY=bf1548ea41975ce03a084e2e8c1501bf
+```
+
+- Install node 18 preferably and install the project deps
+```
+$ nvm install 18;
+$ yarn install
+```
+
+- Run the project
+```
+$ yarn start
+```
+
+That should be all.
+
+If you encounter any issues with the API key and .env file modify `src/utils/constants.js` and change this line:
+```
+export const API_KEY          = process.env['REACT_APP_API_KEY'];
+```
+by
+```
+export const API_KEY          = "<OpenWeatherKeySecretValue>";
+```
+
+For testing <OpenWeatherKeySecretValue> is `bf1548ea41975ce03a084e2e8c1501bf`
+
 # Useful Links
 
 - https://openweathermap.org/api/one-call-3
